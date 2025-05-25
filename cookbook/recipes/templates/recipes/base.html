@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Django MongoDB Backend Recipes{% endblock %}</title>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body class="flex flex-col min-h-screen bg-gray-50">
+    <header class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-4 py-3 flex-grow">
+            <nav class="flex flex-row">
+                <p class="text-2xl font-medium">Cool MongoDB & Django Recipe App</p>
+            </nav>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6 flex-grow">
+        {% block content %}
+        <h1 class="text-3xl font-bold underline">Hello world!</h1>
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p>&copy; {% now "Y" %} Django + MongoDB <3 </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

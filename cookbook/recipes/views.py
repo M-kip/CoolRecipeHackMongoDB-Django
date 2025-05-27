@@ -38,3 +38,36 @@ class recipeDetails(DetailView):
         except InvalidId:
             raise Http404(f"Invalid recipe ID format: {recipe_id}")
         return super().dispatch(request, *args, **kwargs)
+
+class recipe_statistics(TemplateView):
+    template_name = 'recipes/statistics.html'
+
+
+    def recipe_statistics(self):
+        """Define the aggregation pipeline"""
+        pipeline = [
+            # Stage 1: Extract cuisine from the features subdocument
+            {"$project": {"_id": 1, "cuisine": "$features.cuisine"}},
+            # Stage 2: Group by cuisine and count occurrences
+            {"$group": {"_id": "$cuisine", "count": {"$sum": 1}}},
+            # Stage 3: Sort by count in descending order
+            {"$sort": {"count": -1}},
+            # Stage 4: Reshape the output for better readability
+            {
+                "$project": {
+                    "_id": 1,
+                    "cuisine": {"$ifNull": ["$_id", "Unspecified"]},
+                    "count": 1,
+                }
+            },
+        ]
+
+        stats = Recipe.objects.raw_aggregate(pipeline)
+        return list(stats)
+    
+    def get_context_data(self, **kwargs):
+        # get super context data
+        context = super().get_context_data(**kwargs)
+        # add in the stats
+        context['cuisine_stats'] = self.recipe_statistics()
+        return context

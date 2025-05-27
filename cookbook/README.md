@@ -43,3 +43,8 @@ The **Django MongoDB Backend** that we are going to use in a simple project is t
 - A local Atlas deployment
 - A Voyage API key (link) for generating the embeddings
 - An Anthropic API key for the LLM
+
+## project objectives
+- Learn MongoDB CRUD features
+- Explore MongoDB architecture
+- Test and document Vector search capabilities

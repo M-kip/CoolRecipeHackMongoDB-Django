@@ -1,31 +1,3 @@
-# Django MongoDB Backend - Project Template
-
-This is a Django project starter template for the Django MongoDB Backend.
-In order to use it with your version of Django: 
-
-- Find your Django version. To do so from the command line, make sure you
-  have Django installed and run:
-
-```bash
-django-admin --version
->> 5.2
-```
-
-## Create the Django project
-
-From your shell, run the following command to create a new Django project
-replacing the `{{ project_name }}` and `{{ version }}` sections. 
-
-```bash
-django-admin startproject {{ project_name }} --template https://github.com/mongodb-labs/django-mongodb-project/archive/refs/heads/{{ version }}.x.zip
-```
-
-For a project named `5_2_example` that runs on `django==5.2.*`
-the command would look like this:
-
-```bash
-django-admin startproject 5_2_example --template https://github.com/mongodb-labs/django-mongodb-project/archive/refs/heads/5.2.x.zip
-```
 ## The project: a smart recipe application
 To showcase the Django MongoDB Backend, we will create a simple project—a web application that will store recipes (the ingredients and the instructions)—and provide a couple of ways to search through them and get recommendations based on the current contents of your fridge. We will use some scraped recipes and try to showcase the speed and power of the backend through a simple application.
 

@@ -8,7 +8,7 @@ from tqdm import tqdm
 
 load_dotenv()
 
-MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:12404/?directConnection=true")
+MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:51751/?directConnection=true")
 MONGO_DB = os.getenv("MONGO_DB", "cookbook")
 
 

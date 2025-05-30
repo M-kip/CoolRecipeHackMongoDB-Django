@@ -5,43 +5,118 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Django MongoDB Backend Recipes{% endblock %}</title>
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     {% block extra_css %}{% endblock %}
 </head>
 
 <body class="flex flex-col min-h-screen bg-gray-50">
-    <header class="bg-gray-800 text-white py-6">
-        <div class="container mx-auto px-4 py-3 flex-grow">
-            <nav class="flex flex-row">
-                <p class="text-2xl font-medium">Cool MongoDB & Django Recipe App</p>
-                <div class="flex flex-row p-2 font-medium text-xl">
-                    <a href="">About</a>
-                </div>
-            </nav>
+    <!-- Mobile Header - Only shown on small screens -->
+    <header class="bg-blue-600 text-white py-3 px-4 md:hidden">
+        <div class="flex justify-between items-center">
+            <a href="{% url 'recipes:index' %}" class="text-xl font-bold">Cool Recipes Repository</a>
+            <button id="mobile-menu-button" class="text-white focus:outline-none">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden mt-3">
+            <a href="{% url 'recipes:index' %}" class="block py-2 hover:bg-blue-700 rounded px-2">Home</a>
+            <a href="{% url 'recipes:ingredient_search' %}" class="block py-2 hover:bg-blue-700 rounded px-2">Search</a>
+            <a href="{% url 'recipes:list_recipes' %}" class="block py-2 hover:bg-blue-700 rounded px-2">All Recipes</a>
+            <a href="{% url 'recipes:recipe_stats' %}" class="block py-2 hover:bg-blue-700 rounded px-2">Statistics</a>
         </div>
     </header>
-    <!-- Main Content -->
-    <main class="container mx-auto px-4 py-6 flex-grow">
-        {% block content %}
-        <h1 class="text-3xl font-bold underline">Hello world!</h1>
-        {% endblock %}
-    </main>
+
+    <div class="flex flex-grow">
+        <!-- Left Sidebar -->
+        <aside class="w-64 bg-gray-800 text-white hidden md:block">
+            <div class="p-4 sticky top-0">
+                <!-- Logo/Title Area -->
+                <div class="mb-6 pb-4 border-b border-gray-700">
+                    <a href="{% url 'recipes:index' %}" class="text-xl font-bold block">
+                        MongoDB Recipes
+                    </a>
+                </div>
+
+                <h3 class="text-lg font-semibold mb-4 border-b border-gray-700 pb-2">Navigation</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <a href="{% url 'recipes:index' %}" class="block py-2 px-4 hover:bg-gray-700 rounded transition">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'recipes:ingredient_search' %}"
+                            class="block py-2 px-4 hover:bg-gray-700 rounded transition">
+                            Search Recipes
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'recipes:list_recipes' %}" class="block py-2 px-4 hover:bg-gray-700 rounded transition">
+                            All Recipes
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'recipes:recipe_stats' %}" class="block py-2 px-4 hover:bg-gray-700 rounded transition">
+                            Recipe Statistics
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'recipes:ingredient_search' %}"
+                            class="block py-2 px-4 hover:bg-gray-700 rounded transition">
+                            Ingredient Search
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'recipes:fuzzy_search' %}" class="block py-2 px-4 hover:bg-gray-700 rounded transition">
+                            Atlas Search
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'recipes:ai_meal_suggestions' %}"
+                            class="block py-2 px-4 hover:bg-gray-700 rounded transition">
+                            AI Meal Suggestions
+                        </a>
+                    </li>
+                </ul>
+
+
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-grow px-4 py-6">
+            <div class="container mx-auto">
+                {% block content %}
+                <h1 class="text-3xl font-bold underline">Hello world!</h1>
+                {% endblock %}
+            </div>
+        </main>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-6">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-4 md:mb-0">
-                    <p>&copy; {% now "Y" %} Django + MongoDB <3 </p>
+                    <p>&copy; {% now "Y" %} Django + MongoDB = Backend <3 </p>
                 </div>
             </div>
         </div>
     </footer>
 
+    <script>
+        // Toggle mobile menu
+        document.getElementById('mobile-menu-button').addEventListener('click', function () {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
+    {% block extra_js %}{% endblock %}
 </body>
 
 </html>
